@@ -24,16 +24,13 @@ Configurtion:
 */
 
 defined('IN_MANAGER_MODE') or die();
+if ($modx->event->name !== 'OnDocFormRender') return;
 
 if(empty($separator)) $separator = '<!-- hr -->';
 if(empty($open_text)) $open_text = 'system content';
 if(empty($position)) $position = 'after';
 
 $get_action = isset($_GET['a']) ? $_GET['a'] : 27;
-
-$e = &$modx->Event;
-
-if ($e->name == 'OnDocFormRender') {
 
 $output = <<< OUT
 
@@ -148,6 +145,4 @@ window.addEvent('domready', function(){
 
 OUT;
 
-$e->output($output);
-
-}
+$modx->event->output($output);
